@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Agua Potable Comunitaria</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            margin: 0;
+            background-color: #f4f6f8;
+            color: #333;
+        }
+        header {
+            background-color: #0077b6;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        nav {
+            background-color: #023e8a;
+            padding: 10px;
+            text-align: center;
+        }
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        section {
+            padding: 20px;
+            margin: 20px;
+            background-color: white;
+            border-radius: 5px;
+        }
+        h2 {
+            color: #0077b6;
+        }
+        footer {
+            background-color: #023e8a;
+            color: white;
+            text-align: center;
+            padding: 10px;
+        }
+        .alerta {
+            background-color: #ffdd57;
+            padding: 15px;
+            border-left: 5px solid #fca311;
+            margin-top: 10px;
+        }
+        .login, .admin-panel {
+            max-width: 400px;
+            margin: auto;
+        }
+        input, textarea, button {
+            width: 100%;
+            padding: 10px;
+            margin-top: 10px;
+        }
+        button {
+            background-color: #0077b6;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Comunidad El Manantial</h1>
+    <p>Información oficial sobre el servicio de agua potable</p>
+</header>
+
+<nav>
+    <a href="#horarios">Horarios</a>
+    <a href="#calidad">Calidad del agua</a>
+    <a href="#avisos">Avisos</a>
+</nav>
+
+<section id="horarios">
+    <h2>Horarios de Distribución</h2>
+    <ul>
+        <li><strong>Sector Norte:</strong> Lunes y Jueves – 6:00 a.m. a 10:00 a.m.</li>
+        <li><strong>Sector Centro:</strong> Martes y Viernes – 7:00 a.m. a 11:00 a.m.</li>
+        <li><strong>Sector Sur:</strong> Miércoles y Sábados – 6:00 a.m. a 9:00 a.m.</li>
+    </ul>
+</section>
+
+<section id="calidad">
+    <h2>Calidad del Agua</h2>
+    <p><strong>Estado:</strong> Apta para consumo</p>
+    <p><strong>Último análisis:</strong> Enero 2026</p>
+    <p><strong>Recomendación:</strong> Hervir el agua para niños y adultos mayores.</p>
+</section>
+
+<section id="avisos">
+    <h2>Avisos y Alertas Comunitarias</h2>
+    <div id="listaAvisos"></div>
+</section>
+
+<section class="login" id="login">
+    <h2>Acceso del Administrador</h2>
+    <input type="text" id="usuario" placeholder="Usuario">
+    <input type="password" id="clave" placeholder="Contraseña">
+    <button onclick="login()">Ingresar</button>
+</section>
+
+<section class="admin-panel" id="adminPanel" style="display:none;">
+    <h2>Publicar Aviso</h2>
+    <textarea id="nuevoAviso" placeholder="Escriba el aviso..."></textarea>
+    <button onclick="publicarAviso()">Publicar</button>
+</section>
+
+<footer>
+    <p>© 2026 Comité Comunitario de Agua Potable</p>
+</footer>
+
+<script>
+    const ADMIN_USER = "admin";
+    const ADMIN_PASS = "1234";
+
+    function login() {
+        const u = document.getElementById("usuario").value;
+        const p = document.getElementById("clave").value;
+
+        if (u === ADMIN_USER && p === ADMIN_PASS) {
+            document.getElementById("login").style.display = "none";
+            document.getElementById("adminPanel").style.display = "block";
+        } else {
+            alert("Credenciales incorrectas");
+        }
+    }
+
+    function publicarAviso() {
+        const texto = document.getElementById("nuevoAviso").value;
+        if (texto === "") return;
+
+        const div = document.createElement("div");
+        div.className = "alerta";
+        div.innerText = texto;
+        document.getElementById("listaAvisos").prepend(div);
+
+        document.getElementById("nuevoAviso").value = "";
+    }
+</script>
+
+</body>
+</html>
