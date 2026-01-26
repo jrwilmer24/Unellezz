@@ -13,10 +13,7 @@
             --text: #1f2933;
         }
 
-        * {
-            box-sizing: border-box;
-        }
-
+        * { box-sizing: border-box; }
         body {
             margin: 0;
             font-family: 'Segoe UI', Tahoma, sans-serif;
@@ -31,11 +28,7 @@
             padding: 40px 20px;
             text-align: center;
         }
-
-        header h1 {
-            margin: 0;
-            font-size: 2.5rem;
-        }
+        header h1 { margin: 0; font-size: 2.5rem; }
 
         nav {
             background-color: #ffffff;
@@ -48,12 +41,7 @@
             top: 0;
             z-index: 100;
         }
-
-        nav a {
-            text-decoration: none;
-            color: var(--primary);
-            font-weight: 600;
-        }
+        nav a { text-decoration: none; color: var(--primary); font-weight: 600; }
 
         main {
             max-width: 1100px;
@@ -64,32 +52,13 @@
             gap: 25px;
         }
 
-        section {
-            background-color: var(--card);
-            border-radius: 12px;
-            padding: 25px;
-            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
-        }
-
-        h2 {
-            margin-top: 0;
-            color: var(--primary);
-        }
-
-        ul {
-            padding-left: 20px;
-        }
-
-        .alerta {
-            background-color: #fff3cd;
-            border-left: 6px solid #f59e0b;
-            padding: 15px;
-            border-radius: 8px;
-            margin-top: 10px;
-        }
+        section { background-color: var(--card); border-radius: 12px; padding: 25px; box-shadow: 0 6px 15px rgba(0,0,0,0.08); }
+        h2 { margin-top: 0; color: var(--primary); }
+        ul { padding-left: 20px; }
+        .alerta { background-color: #fff3cd; border-left: 6px solid #f59e0b; padding: 15px; border-radius: 8px; margin-top: 10px; }
 
         .login, .admin-panel {
-            max-width: 400px;
+            max-width: 500px;
             margin: 40px auto;
             background-color: var(--card);
             padding: 30px;
@@ -105,11 +74,7 @@
             border: 1px solid #cbd5e1;
             font-size: 1rem;
         }
-
-        textarea {
-            resize: vertical;
-        }
-
+        textarea { resize: vertical; }
         button {
             background-color: var(--primary);
             color: white;
@@ -117,10 +82,7 @@
             cursor: pointer;
             font-weight: 600;
         }
-
-        button:hover {
-            background-color: #084298;
-        }
+        button:hover { background-color: #084298; }
 
         footer {
             background-color: #0f172a;
@@ -151,7 +113,7 @@
 <main>
     <section id="horarios">
         <h2>Horarios de Distribución</h2>
-        <ul>
+        <ul id="listaHorarios">
             <li><strong>Sector Norte:</strong> Lunes y Jueves – 6:00 a.m. a 10:00 a.m.</li>
             <li><strong>Sector Centro:</strong> Martes y Viernes – 7:00 a.m. a 11:00 a.m.</li>
             <li><strong>Sector Sur:</strong> Miércoles y Sábados – 6:00 a.m. a 9:00 a.m.</li>
@@ -160,9 +122,9 @@
 
     <section id="calidad">
         <h2>Calidad del Agua</h2>
-        <p><strong>Estado:</strong> Apta para consumo</p>
-        <p><strong>Último análisis:</strong> Enero 2026</p>
-        <p><strong>Recomendación:</strong> Hervir el agua para niños y adultos mayores.</p>
+        <p id="estado"><strong>Estado:</strong> Apta para consumo</p>
+        <p id="ultimoAnalisis"><strong>Último análisis:</strong> Enero 2026</p>
+        <p id="recomendacion"><strong>Recomendación:</strong> Hervir el agua para niños y adultos mayores.</p>
     </section>
 
     <section id="avisos">
@@ -171,6 +133,7 @@
     </section>
 </main>
 
+<!-- Login -->
 <section class="login" id="login">
     <h2>Acceso del Administrador</h2>
     <input type="text" id="usuario" placeholder="Usuario">
@@ -178,10 +141,25 @@
     <button onclick="login()">Ingresar</button>
 </section>
 
+<!-- Panel Administrador -->
 <section class="admin-panel" id="adminPanel" style="display:none;">
-    <h2>Publicar Aviso</h2>
+    <h2>Panel de Administración</h2>
+
+    <h3>Editar Horarios</h3>
+    <textarea id="editarHorarios" rows="5"></textarea>
+    <button onclick="guardarHorarios()">Guardar Horarios</button>
+
+    <h3>Editar Calidad del Agua</h3>
+    <input type="text" id="editarEstado" placeholder="Estado">
+    <input type="text" id="editarAnalisis" placeholder="Último análisis">
+    <input type="text" id="editarRecomendacion" placeholder="Recomendación">
+    <button onclick="guardarCalidad()">Guardar Calidad</button>
+
+    <h3>Publicar Aviso</h3>
     <textarea id="nuevoAviso" placeholder="Escriba el aviso..."></textarea>
     <button onclick="publicarAviso()">Publicar aviso</button>
+
+    <button style="margin-top:20px; background-color:#dc3545;" onclick="cerrarSesion()">Cerrar Sesión</button>
 </section>
 
 <footer>
@@ -211,6 +189,43 @@
         div.innerText = texto;
         document.getElementById('listaAvisos').prepend(div);
         document.getElementById('nuevoAviso').value = '';
+    }
+
+    function guardarHorarios() {
+        const contenido = document.getElementById('editarHorarios').value;
+        if (!contenido) return;
+        const lista = contenido.split('\n'); // cada línea es un horario
+        const ul = document.getElementById('listaHorarios');
+        ul.innerHTML = '';
+        lista.forEach(item => {
+            if(item.trim() !== '') {
+                const li = document.createElement('li');
+                li.innerHTML = item;
+                ul.appendChild(li);
+            }
+        });
+        document.getElementById('editarHorarios').value = '';
+    }
+
+    function guardarCalidad() {
+        const estado = document.getElementById('editarEstado').value;
+        const analisis = document.getElementById('editarAnalisis').value;
+        const recomendacion = document.getElementById('editarRecomendacion').value;
+
+        if (estado) document.getElementById('estado').innerHTML = `<strong>Estado:</strong> ${estado}`;
+        if (analisis) document.getElementById('ultimoAnalisis').innerHTML = `<strong>Último análisis:</strong> ${analisis}`;
+        if (recomendacion) document.getElementById('recomendacion').innerHTML = `<strong>Recomendación:</strong> ${recomendacion}`;
+
+        document.getElementById('editarEstado').value = '';
+        document.getElementById('editarAnalisis').value = '';
+        document.getElementById('editarRecomendacion').value = '';
+    }
+
+    function cerrarSesion() {
+        document.getElementById('adminPanel').style.display = 'none';
+        document.getElementById('login').style.display = 'block';
+        document.getElementById('usuario').value = '';
+        document.getElementById('clave').value = '';
     }
 </script>
 
