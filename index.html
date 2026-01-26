@@ -5,64 +5,133 @@
     <title>Agua Potable Comunitaria</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        :root {
+            --primary: #0b5ed7;
+            --secondary: #0dcaf0;
+            --background: #f1f5f9;
+            --card: #ffffff;
+            --text: #1f2933;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
         body {
-            font-family: Arial, Helvetica, sans-serif;
             margin: 0;
-            background-color: #f4f6f8;
-            color: #333;
+            font-family: 'Segoe UI', Tahoma, sans-serif;
+            background-color: var(--background);
+            color: var(--text);
+            line-height: 1.6;
         }
+
         header {
-            background-color: #0077b6;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
             color: white;
-            padding: 20px;
+            padding: 40px 20px;
             text-align: center;
         }
+
+        header h1 {
+            margin: 0;
+            font-size: 2.5rem;
+        }
+
         nav {
-            background-color: #023e8a;
-            padding: 10px;
-            text-align: center;
+            background-color: #ffffff;
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            padding: 15px 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
         }
+
         nav a {
-            color: white;
-            margin: 0 15px;
             text-decoration: none;
-            font-weight: bold;
+            color: var(--primary);
+            font-weight: 600;
         }
+
+        main {
+            max-width: 1100px;
+            margin: auto;
+            padding: 30px 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
         section {
-            padding: 20px;
-            margin: 20px;
-            background-color: white;
-            border-radius: 5px;
+            background-color: var(--card);
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.08);
         }
+
         h2 {
-            color: #0077b6;
+            margin-top: 0;
+            color: var(--primary);
         }
-        footer {
-            background-color: #023e8a;
-            color: white;
-            text-align: center;
-            padding: 10px;
+
+        ul {
+            padding-left: 20px;
         }
+
         .alerta {
-            background-color: #ffdd57;
+            background-color: #fff3cd;
+            border-left: 6px solid #f59e0b;
             padding: 15px;
-            border-left: 5px solid #fca311;
+            border-radius: 8px;
             margin-top: 10px;
         }
+
         .login, .admin-panel {
             max-width: 400px;
-            margin: auto;
+            margin: 40px auto;
+            background-color: var(--card);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 6px 15px rgba(0,0,0,0.1);
         }
+
         input, textarea, button {
             width: 100%;
-            padding: 10px;
-            margin-top: 10px;
+            padding: 12px;
+            margin-top: 12px;
+            border-radius: 8px;
+            border: 1px solid #cbd5e1;
+            font-size: 1rem;
         }
+
+        textarea {
+            resize: vertical;
+        }
+
         button {
-            background-color: #0077b6;
+            background-color: var(--primary);
             color: white;
             border: none;
             cursor: pointer;
+            font-weight: 600;
+        }
+
+        button:hover {
+            background-color: #084298;
+        }
+
+        footer {
+            background-color: #0f172a;
+            color: #e5e7eb;
+            text-align: center;
+            padding: 20px;
+            margin-top: 40px;
+        }
+
+        @media (max-width: 600px) {
+            header h1 { font-size: 2rem; }
         }
     </style>
 </head>
@@ -70,7 +139,7 @@
 
 <header>
     <h1>Comunidad El Manantial</h1>
-    <p>Información oficial sobre el servicio de agua potable</p>
+    <p>Portal informativo del servicio de agua potable</p>
 </header>
 
 <nav>
@@ -79,26 +148,28 @@
     <a href="#avisos">Avisos</a>
 </nav>
 
-<section id="horarios">
-    <h2>Horarios de Distribución</h2>
-    <ul>
-        <li><strong>Sector Norte:</strong> Lunes y Jueves – 6:00 a.m. a 10:00 a.m.</li>
-        <li><strong>Sector Centro:</strong> Martes y Viernes – 7:00 a.m. a 11:00 a.m.</li>
-        <li><strong>Sector Sur:</strong> Miércoles y Sábados – 6:00 a.m. a 9:00 a.m.</li>
-    </ul>
-</section>
+<main>
+    <section id="horarios">
+        <h2>Horarios de Distribución</h2>
+        <ul>
+            <li><strong>Sector Norte:</strong> Lunes y Jueves – 6:00 a.m. a 10:00 a.m.</li>
+            <li><strong>Sector Centro:</strong> Martes y Viernes – 7:00 a.m. a 11:00 a.m.</li>
+            <li><strong>Sector Sur:</strong> Miércoles y Sábados – 6:00 a.m. a 9:00 a.m.</li>
+        </ul>
+    </section>
 
-<section id="calidad">
-    <h2>Calidad del Agua</h2>
-    <p><strong>Estado:</strong> Apta para consumo</p>
-    <p><strong>Último análisis:</strong> Enero 2026</p>
-    <p><strong>Recomendación:</strong> Hervir el agua para niños y adultos mayores.</p>
-</section>
+    <section id="calidad">
+        <h2>Calidad del Agua</h2>
+        <p><strong>Estado:</strong> Apta para consumo</p>
+        <p><strong>Último análisis:</strong> Enero 2026</p>
+        <p><strong>Recomendación:</strong> Hervir el agua para niños y adultos mayores.</p>
+    </section>
 
-<section id="avisos">
-    <h2>Avisos y Alertas Comunitarias</h2>
-    <div id="listaAvisos"></div>
-</section>
+    <section id="avisos">
+        <h2>Avisos y Alertas Comunitarias</h2>
+        <div id="listaAvisos"></div>
+    </section>
+</main>
 
 <section class="login" id="login">
     <h2>Acceso del Administrador</h2>
@@ -110,11 +181,11 @@
 <section class="admin-panel" id="adminPanel" style="display:none;">
     <h2>Publicar Aviso</h2>
     <textarea id="nuevoAviso" placeholder="Escriba el aviso..."></textarea>
-    <button onclick="publicarAviso()">Publicar</button>
+    <button onclick="publicarAviso()">Publicar aviso</button>
 </section>
 
 <footer>
-    <p>© 2026 Comité Comunitario de Agua Potable</p>
+    <p>© 2026 Comité Comunitario de Agua Potable – Comunidad El Manantial</p>
 </footer>
 
 <script>
@@ -122,27 +193,24 @@
     const ADMIN_PASS = "1234";
 
     function login() {
-        const u = document.getElementById("usuario").value;
-        const p = document.getElementById("clave").value;
-
+        const u = document.getElementById('usuario').value;
+        const p = document.getElementById('clave').value;
         if (u === ADMIN_USER && p === ADMIN_PASS) {
-            document.getElementById("login").style.display = "none";
-            document.getElementById("adminPanel").style.display = "block";
+            document.getElementById('login').style.display = 'none';
+            document.getElementById('adminPanel').style.display = 'block';
         } else {
-            alert("Credenciales incorrectas");
+            alert('Credenciales incorrectas');
         }
     }
 
     function publicarAviso() {
-        const texto = document.getElementById("nuevoAviso").value;
-        if (texto === "") return;
-
-        const div = document.createElement("div");
-        div.className = "alerta";
+        const texto = document.getElementById('nuevoAviso').value;
+        if (!texto) return;
+        const div = document.createElement('div');
+        div.className = 'alerta';
         div.innerText = texto;
-        document.getElementById("listaAvisos").prepend(div);
-
-        document.getElementById("nuevoAviso").value = "";
+        document.getElementById('listaAvisos').prepend(div);
+        document.getElementById('nuevoAviso').value = '';
     }
 </script>
 
